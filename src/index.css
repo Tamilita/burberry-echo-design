@@ -1,42 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Vicuña de Oro Design System - Luxury inspired by Burberry */
 
 @layer base {
   :root {
+    /* Core Colors - Luxury Palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 0 0% 0%;
+    
+    /* Brand Colors - Vicuña Gold Theme */
+    --primary: 45 65% 51%; /* Rich Gold */
+    --primary-foreground: 0 0% 100%;
+    --primary-muted: 45 35% 75%; /* Soft Gold */
+    
+    /* Secondary - Warm Earth Tones */
+    --secondary: 30 25% 85%; /* Warm Beige */
+    --secondary-foreground: 0 0% 0%;
+    
+    /* Accent - Royal Blue */
+    --accent: 220 100% 25%; /* Deep Royal Blue */
+    --accent-foreground: 0 0% 100%;
+    
+    /* Neutrals */
+    --muted: 45 20% 96%; /* Cream */
+    --muted-foreground: 0 0% 40%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --card-foreground: 0 0% 0%;
+    
+    --border: 45 15% 90%;
+    --input: 45 15% 95%;
+    --ring: 45 65% 51%;
+    
+    /* Spacing */
+    --radius: 0.375rem;
+    
+    /* Luxury Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(45, 65%, 51%), hsl(45, 75%, 65%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0, 0%, 100%), hsl(45, 20%, 98%));
+    
+    /* Shadows */
+    --shadow-luxury: 0 10px 40px -10px hsl(45, 65%, 51% / 0.2);
+    --shadow-hover: 0 20px 60px -10px hsl(45, 65%, 51% / 0.3);
+    
+    /* Typography Scale */
+    --text-hero: 3.5rem;
+    --text-display: 2.5rem;
+    --text-heading: 1.875rem;
+    --text-subheading: 1.25rem;
+    --text-body: 1rem;
+    --text-small: 0.875rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +117,157 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-['Inter'] antialiased;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-['Playfair_Display'] font-semibold;
+  }
+}
+
+@layer components {
+  /* Luxury Animation Classes */
+  .fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  .fade-up {
+    animation: fadeUp 0.8s ease-out;
+  }
+
+  .stagger-fade {
+    animation: fadeUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .stagger-fade:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-fade:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-fade:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-fade:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-fade:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-fade:nth-child(6) { animation-delay: 0.6s; }
+
+  /* Luxury Hover Effects */
+  .luxury-hover {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .luxury-hover:hover {
+    transform: scale(1.02);
+  }
+
+  /* Enhanced Image Hover for Products */
+  .product-hover {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .product-hover:hover {
+    transform: scale(1.08);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Image Overlay Effects */
+  .image-overlay {
+    @apply relative overflow-hidden;
+  }
+
+  .image-overlay::after {
+    content: '';
+    @apply absolute inset-0 bg-foreground/0 transition-all duration-300;
+  }
+
+  .image-overlay:hover::after {
+    @apply bg-foreground/10;
+  }
+
+  /* Luxury Buttons */
+  .btn-luxury {
+    @apply px-8 py-3 text-primary-foreground font-medium tracking-wide uppercase text-sm;
+    background: var(--gradient-gold);
+    box-shadow: var(--shadow-luxury);
+    @apply transition-all duration-300 hover:shadow-xl;
+  }
+
+  .btn-luxury:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Navigation Underline Effect */
+  .nav-link {
+    @apply relative transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  /* Hero Text Styling */
+  .hero-text {
+    font-size: var(--text-hero);
+    @apply leading-tight tracking-tight;
+  }
+
+  .display-text {
+    font-size: var(--text-display);
+    @apply leading-tight;
+  }
+
+  /* Product Grid */
+  .product-grid {
+    @apply grid gap-6;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 3px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  :root {
+    --text-hero: 2.5rem;
+    --text-display: 2rem;
+    --text-heading: 1.5rem;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
   }
 }
