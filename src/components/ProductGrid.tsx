@@ -1,118 +1,99 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  image: string;
-  hoverImage?: string;
-  category: string;
-}
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ProductGrid = () => {
-  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
-
-  const products: Product[] = [
+  const products = [
     {
       id: 1,
-      name: "Sombrero Clásico Miel",
-      price: "S/ 280",
-      image: "/lovable-uploads/d8b657cb-b7c4-45a1-b688-70370ace8b53.png",
-      category: "Clásicos"
+      name: "Sombrero Clásico de Vicuña",
+      price: "$1,450",
+      description: "Elegante sombrero confeccionado con fibra de vicuña premium",
+      image: "/lovable-uploads/ee5f4890-3dbc-47a7-b42b-16801eab3301.png"
     },
     {
       id: 2,
-      name: "Sombrero Elegante Negro",
-      price: "S/ 320",
-      image: "/lovable-uploads/1a482b32-14be-4e22-9d29-96baf376085e.png",
-      category: "Elegantes"
+      name: "Gorro Artesanal Andino",
+      price: "$890",
+      description: "Diseño tradicional con técnicas ancestrales",
+      image: "/lovable-uploads/1a482b32-14be-4e22-9d29-96baf376085e.png"
     },
     {
       id: 3,
-      name: "Sombrero Floral Camel",
-      price: "S/ 295",
-      image: "/lovable-uploads/fab24abe-6da3-4157-aed3-77b065d2011f.png",
-      category: "Decorados"
+      name: "Bufanda de Alpaca",
+      price: "$650",
+      description: "Suave y cálida, perfecta para cualquier ocasión",
+      image: "/lovable-uploads/4865a91e-4861-4b8e-a699-6dc5425538e8.png"
     },
     {
       id: 4,
-      name: "Sombrero Artesanal Bordado",
-      price: "S/ 350",
-      image: "/lovable-uploads/4865a91e-4861-4b8e-a699-6dc5425538e8.png",
-      category: "Artesanales"
+      name: "Abrigo de Invierno",
+      price: "$2,300",
+      description: "Elegancia y calidez en una sola prenda",
+      image: "/lovable-uploads/c8fb985f-fd95-4645-867d-c7faef7dc61a.png"
     },
     {
       id: 5,
-      name: "Sombrero Premium Negro",
-      price: "S/ 380",
-      image: "/lovable-uploads/c8fb985f-fd95-4645-867d-c7faef7dc61a.png",
-      category: "Premium"
+      name: "Conjunto Premium",
+      price: "$3,200",
+      description: "La más fina selección de fibra de vicuña",
+      image: "/lovable-uploads/fab24abe-6da3-4157-aed3-77b065d2011f.png"
+    },
+    {
+      id: 6,
+      name: "Chaleco Tradicional",
+      price: "$1,200",
+      description: "Diseño clásico con bordados artesanales",
+      image: "/lovable-uploads/d8b657cb-b7c4-45a1-b688-70370ace8b53.png"
     }
   ];
 
   return (
-    <section className="py-20 bg-muted">
+    <section className="py-20">
       <div className="container mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="display-text font-playfair mb-4 stagger-fade">
-            Nueva Colección
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="display-text font-playfair mb-4">
+            Colección Destacada
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto stagger-fade">
-            Cada sombrero es una obra de arte, creado con fibra de vicuña 
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Cada pieza es una obra de arte, creada con fibra de vicuña 
             y técnicas ancestrales transmitidas de generación en generación.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Product Grid */}
         <div className="product-grid">
           {products.map((product, index) => (
-            <div
-              key={product.id}
-              className={`group cursor-pointer stagger-fade`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-              onMouseEnter={() => setHoveredProduct(product.id)}
-              onMouseLeave={() => setHoveredProduct(null)}
+            <motion.div 
+              key={product.id} 
+              className="group"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <div className="image-overlay bg-white rounded-lg overflow-hidden mb-4">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-80 object-cover luxury-hover"
-                />
-                
-                {/* Overlay Content */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="text-center text-white">
-                    <p className="text-sm uppercase tracking-wide mb-2">
-                      {product.category}
-                    </p>
-                    <button className="btn-luxury text-xs">
-                      Ver Detalles
-                    </button>
+              <Link to={`/product/${product.id}`} className="block">
+                <div className="relative overflow-hidden rounded-lg mb-4">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-white text-lg font-medium">Ver Detalles</span>
                   </div>
                 </div>
-              </div>
-
-              {/* Product Info */}
-              <div className="text-center">
-                <h3 className="font-playfair text-lg mb-2 group-hover:text-accent transition-colors">
-                  {product.name}
-                </h3>
-                <p className="text-muted-foreground font-medium">
-                  {product.price}
-                </p>
-              </div>
-            </div>
+                <div className="space-y-2">
+                  <h3 className="font-playfair text-lg font-medium">{product.name}</h3>
+                  <p className="text-muted-foreground text-sm">{product.description}</p>
+                  <p className="text-primary font-medium">{product.price}</p>
+                </div>
+              </Link>
+            </motion.div>
           ))}
-        </div>
-
-        {/* View All Button */}
-        <div className="text-center mt-16">
-          <Button className="btn-luxury">
-            Ver Toda la Colección
-          </Button>
         </div>
       </div>
     </section>

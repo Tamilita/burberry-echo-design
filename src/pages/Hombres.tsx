@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -44,7 +45,13 @@ const Hombres = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <motion.div 
+      className="min-h-screen"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
+    >
       <Header />
       
       <main className="pt-20">
@@ -152,7 +159,7 @@ const Hombres = () => {
       </main>
 
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 

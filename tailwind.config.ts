@@ -62,6 +62,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Burberry Brand Colors
+				burberry: {
+					beige: '#F5F5F0',
+					honey: '#BFA47A',
+					blue: '#003F7F',
+					black: '#000000',
+					white: '#FFFFFF'
 				}
 			},
 			fontFamily: {

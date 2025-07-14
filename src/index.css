@@ -116,13 +116,31 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground font-['Inter'] antialiased;
-    scroll-behavior: smooth;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-['Playfair_Display'] font-semibold;
+  }
+
+  /* Responsive spacing and typography */
+  @media (min-width: 768px) {
+    .container {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 100px;
+      padding-right: 100px;
+    }
   }
 }
 
